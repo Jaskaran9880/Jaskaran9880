@@ -49,10 +49,6 @@ I am a student exploring the world of programming through Python and web technol
   <img width="49%" src="https://github-readme-stats-psi-navy-76.vercel.app/api/top-langs/?username=Jaskaran9880&layout=compact&langs_count=8&hide_border=true&theme=tokyonight" alt="top langs" />
 </div>
 
-<div align="center">
-  <img width="100%" src="https://streak-stats.demolab.com?user=Jaskaran9880&hide_border=true&theme=tokyonight" alt="streak" />
-</div>
-
 ## Contribution Snake
 
 <!-- Snake animation — auto-generated every 12 hours via GitHub Actions -->
