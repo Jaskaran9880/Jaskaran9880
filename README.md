@@ -45,12 +45,12 @@ I am a student exploring the world of programming through Python and web technol
 ## GitHub Stats
 
 <div align="center">
-  <img width="49%" src="https://github-readme-stats-psi-navy-76.vercel.app/api?username=Jaskaran9880&show_icons=true&count_private=true&include_all_commits=true&hide_rank=true&hide_border=true&title_color=D97706&icon_color=0EA5E9&text_color=78716C&bg_color=FFFFFF00" alt="stats" />
-  <img width="49%" src="https://github-readme-stats-psi-navy-76.vercel.app/api/top-langs/?username=Jaskaran9880&layout=compact&langs_count=8&hide_border=true&title_color=D97706&text_color=78716C&bg_color=FFFFFF00" alt="top langs" />
+  <img width="49%" src="https://github-readme-stats-psi-navy-76.vercel.app/api?username=Jaskaran9880&show_icons=true&count_private=true&include_all_commits=true&hide_rank=true&hide_border=true&title_color=D97706&icon_color=0EA5E9&text_color=A8A29E&bg_color=1C1917" alt="stats" />
+  <img width="49%" src="https://github-readme-stats-psi-navy-76.vercel.app/api/top-langs/?username=Jaskaran9880&layout=compact&langs_count=8&hide_border=true&title_color=D97706&text_color=A8A29E&bg_color=1C1917" alt="top langs" />
 </div>
 
 <div align="center">
-  <img width="100%" src="https://streak-stats.demolab.com/?user=Jaskaran9880&hide_border=true&background=FFFFFF00&stroke=D97706&ring=D97706&fire=0EA5E9&currStreakLabel=D97706&sideLabels=78716C&currStreakNum=1C1917&sideNums=1C1917&dates=A8A29E&card_width=1180" alt="streak" />
+  <img width="100%" src="https://streak-stats.demolab.com/?user=Jaskaran9880&hide_border=true&background=1C1917&stroke=D97706&ring=D97706&fire=0EA5E9&currStreakLabel=D97706&sideLabels=A8A29E&currStreakNum=F8FAFC&sideNums=F8FAFC&dates=78716C&card_width=1180" alt="streak" />
 </div>
 
 ## Contribution Snake
