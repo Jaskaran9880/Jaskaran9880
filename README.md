@@ -50,7 +50,7 @@ I am a student exploring the world of programming through Python and web technol
 </div>
 
 <div align="center">
-  <img width="100%" src="https://streak-stats.demolab.com/?user=Jaskaran9880&hide_border=true&background=1C1917&stroke=D97706&ring=D97706&fire=0EA5E9&currStreakLabel=D97706&sideLabels=A8A29E&currStreakNum=F8FAFC&sideNums=F8FAFC&dates=78716C&card_width=1180&v=2" alt="streak" />
+  <img width="100%" src="https://streak-stats.demolab.com/?user=Jaskaran9880&hide_border=true&background=1C1917&stroke=D97706&ring=D97706&fire=0EA5E9&currStreakLabel=D97706&sideLabels=A8A29E&currStreakNum=F8FAFC&sideNums=F8FAFC&dates=78716C" alt="streak" />
 </div>
 
 ## Contribution Snake
