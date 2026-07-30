@@ -1,69 +1,77 @@
 {
   "$schema": "./profile.schema.json",
   "profile": {
-    "name": "Your Name",
-    "username": "yourusername",
-    "headline": "AI Engineer & Product Builder",
-    "affiliation": "Your University or Company",
-    "location": "City, Country",
-    "status": "Learning / Building / Shipping",
+    "name": "Jaskaranpreet Singh",
+    "username": "Jaskaran9880",
+    "headline": "Student at LPU",
+    "affiliation": "Lovely Professional University",
+    "location": "Hoshiarpur, Punjab",
+    "status": "Learning",
     "about": [
-      "I build practical systems at the intersection of artificial intelligence, software engineering, and products people can trust.",
-      "My work combines technical exploration with a builder mindset: understand the problem, test the system, and share what actually works."
+      "Student at Lovely Professional University exploring Python, web development, and building practical projects.",
+      "Currently learning and growing my skills in software development, one commit at a time."
     ]
   },
   "research": {
-    "primary": "AI Agents",
-    "direction": "Reliable autonomous systems",
-    "themes": "Tool use / evaluation / human control",
-    "narrative": "I am interested in systems that can observe state, use tools, evaluate outcomes, and take bounded actions with clear evidence and human oversight."
+    "primary": "Web Development",
+    "direction": "Building practical applications",
+    "themes": "Python / Web / Learning",
+    "narrative": "I am a student exploring the world of programming through Python and web technologies, focused on building real projects that solve everyday problems."
   },
   "focus": [
     {
-      "name": "AI Agents",
-      "description": "Autonomous workflows, tool use, evaluation, and reliable agent behavior."
+      "name": "Python",
+      "description": "Building foundational skills in Python programming through projects and practice."
     },
     {
-      "name": "Applied AI",
-      "description": "Turning model capabilities into useful and testable software systems."
-    },
-    {
-      "name": "Developer Tools",
-      "description": "Better workflows for building, testing, and operating modern software."
+      "name": "Web Development",
+      "description": "Learning HTML, CSS, and modern web frameworks to create interactive applications."
     }
   ],
   "projects": [
     {
-      "name": "Project One",
-      "url": "https://github.com/yourusername/project-one",
-      "homepage": "",
-      "focus": "Primary project focus",
-      "summary": "A concise explanation of what the project does and why it matters.",
-      "heroLabel": "Primary build"
-    },
-    {
-      "name": "Project Two",
-      "url": "https://github.com/yourusername/project-two",
-      "homepage": "",
-      "focus": "Secondary project focus",
-      "summary": "A second project that supports the professional direction of this profile.",
-      "heroLabel": "Active system"
+      "name": "Portfolio",
+      "url": "https://github.com/Jaskaran9880/Jaskaran9880",
+      "homepage": "https://jaskarans-portfolio.vercel.app",
+      "focus": "Personal profile",
+      "summary": "My animated GitHub profile built with the Profile Console starter kit.",
+      "heroLabel": "Profile"
     }
   ],
   "techStack": [
-    "TypeScript",
-    "Next.js",
     "Python",
-    "PostgreSQL",
-    "Playwright"
+    "HTML",
+    "CSS",
+    "JavaScript"
   ],
   "links": [
     {
       "label": "GitHub",
-      "value": "yourusername",
-      "url": "https://github.com/yourusername",
+      "value": "Jaskaran9880",
+      "url": "https://github.com/Jaskaran9880",
       "logo": "github",
       "color": "0B1220"
+    },
+    {
+      "label": "Portfolio",
+      "value": "Visit",
+      "url": "https://jaskarans-portfolio.vercel.app",
+      "logo": "vercel",
+      "color": "D97706"
+    },
+    {
+      "label": "LinkedIn",
+      "value": "jaskaranpreet-s",
+      "url": "https://www.linkedin.com/in/jaskaranpreet-s",
+      "logo": "linkedin",
+      "color": "0A66C2"
+    },
+    {
+      "label": "Instagram",
+      "value": "jaskaran_9880",
+      "url": "https://www.instagram.com/jaskaran_9880",
+      "logo": "instagram",
+      "color": "E4405F"
     }
   ],
   "activity": {
@@ -71,7 +79,7 @@
     "limit": 6
   },
   "appearance": {
-    "palette": "signal"
+    "palette": "solar"
   },
-  "footer": "Building thoughtful systems and sharing what works."
+  "footer": "Learning in public — building projects and sharing the journey."
 }
