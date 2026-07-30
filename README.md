@@ -45,8 +45,8 @@ I am a student exploring the world of programming through Python and web technol
 ## GitHub Stats
 
 <div align="center">
-  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=Jaskaran9880&show_icons=true&count_private=true&include_all_commits=true&hide_rank=true&hide_border=true&title_color=D97706&icon_color=0EA5E9&text_color=78716C&bg_color=FFFFFF00" alt="stats" />
-  <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Jaskaran9880&layout=compact&langs_count=8&hide_border=true&title_color=D97706&text_color=78716C&bg_color=FFFFFF00" alt="top langs" />
+  <img width="49%" src="https://github-readme-stats-psi-navy-76.vercel.app/api?username=Jaskaran9880&show_icons=true&count_private=true&include_all_commits=true&hide_rank=true&hide_border=true&title_color=D97706&icon_color=0EA5E9&text_color=78716C&bg_color=FFFFFF00" alt="stats" />
+  <img width="49%" src="https://github-readme-stats-psi-navy-76.vercel.app/api/top-langs/?username=Jaskaran9880&layout=compact&langs_count=8&hide_border=true&title_color=D97706&text_color=78716C&bg_color=FFFFFF00" alt="top langs" />
 </div>
 
 <div align="center">
