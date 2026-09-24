@@ -6,7 +6,7 @@ import { generateHeroAssets } from "./lib/hero.mjs";
 
 const source = readFlag("--source");
 if (!source) {
-  console.error("Usage: npm run generate:hero -- --source /absolute/path/to/transparent-portrait.png");
+  console.error("Usage: npm run generate:hero -- --source /absolute/path/to/portrait.jpg");
   process.exit(1);
 }
 

@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, unlink, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
-import { clamp, escapeXml } from "./xml.mjs";
+import { escapeXml } from "./xml.mjs";
 
 const GENERATOR_VERSION = "agent-console-v1";
 
@@ -84,75 +84,24 @@ function buildProfileLines(config) {
 
 async function validatePortrait(sourceBuffer, sourcePath) {
   const metadata = await sharp(sourceBuffer).metadata();
-  if (!metadata.hasAlpha) {
-    throw new Error(`Portrait must have a transparent background. ${sourcePath} does not contain an alpha channel.`);
-  }
-
-  const { channels } = await sharp(sourceBuffer).ensureAlpha().extractChannel("alpha").stats();
-  if (channels[0].min === 255) {
-    throw new Error(`Portrait must contain transparent pixels. Remove the background from ${sourcePath} before generating.`);
+  if (!metadata.width || !metadata.height) {
+    throw new Error(`Could not read image dimensions from ${sourcePath}.`);
   }
 }
 
-async function samplePortrait(sourceBuffer, columns, rows) {
-  const trimOptions = { background: { r: 0, g: 0, b: 0, alpha: 0 }, threshold: 8 };
-  const resizeOptions = { fit: "fill", kernel: sharp.kernel.lanczos3 };
-  const luminancePipeline = sharp(sourceBuffer)
-    .ensureAlpha()
-    .trim(trimOptions)
-    .flatten({ background: "#FFFFFF" })
-    .greyscale()
-    .normalise()
-    .gamma(1.05)
-    .sharpen()
-    .resize(columns, rows, resizeOptions)
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-  const alphaPipeline = sharp(sourceBuffer)
-    .ensureAlpha()
-    .trim(trimOptions)
-    .extractChannel("alpha")
-    .resize(columns, rows, resizeOptions)
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-  const [{ data: luminance, info }, { data: alpha }] = await Promise.all([luminancePipeline, alphaPipeline]);
-  const pixels = Buffer.alloc(luminance.length);
-
-  for (let index = 0; index < luminance.length; index += 1) {
-    const opacity = alpha[index] / 255;
-    pixels[index] = Math.round(255 - opacity * (255 - luminance[index]));
+async function preparePortraitImage(sourceBuffer, width, height) {
+  const metadata = await sharp(sourceBuffer).metadata();
+  let pipeline = sharp(sourceBuffer)
+    .resize(Math.round(width * 2), Math.round(height * 2), {
+      fit: "cover",
+      position: sharp.strategy.attention,
+      kernel: sharp.kernel.lanczos3
+    });
+  if (metadata.hasAlpha) {
+    pipeline = pipeline.flatten({ background: { r: 16, g: 20, b: 28 } });
   }
-
-  return { pixels, width: info.width, height: info.height };
-}
-
-function createAsciiTspans({ pixels, width, height }, placement) {
-  const characters = " .:-=+*#%@";
-  const rows = [];
-
-  for (let row = 0; row < height; row += 1) {
-    let line = "";
-    for (let column = 0; column < width; column += 1) {
-      const index = row * width + column;
-      const pixel = pixels[index];
-      const left = pixels[row * width + Math.max(column - 1, 0)];
-      const right = pixels[row * width + Math.min(column + 1, width - 1)];
-      const above = pixels[Math.max(row - 1, 0) * width + column];
-      const below = pixels[Math.min(row + 1, height - 1) * width + column];
-      const darkness = (255 - pixel) / 255;
-      const edge = (Math.abs(right - left) + Math.abs(below - above)) / 510;
-      if (darkness < 0.045 && edge < 0.04) {
-        line += " ";
-        continue;
-      }
-      const ink = clamp(darkness * 1.02 + edge * 0.5 - 0.025, 0, 1);
-      line += characters[Math.round(ink * (characters.length - 1))];
-    }
-
-    rows.push(`<tspan x="${placement.x}" y="${(placement.y + row * placement.lineHeight).toFixed(2)}" xml:space="preserve">${escapeXml(line)}</tspan>`);
-  }
-
-  return rows.join("\n");
+  const jpeg = await pipeline.jpeg({ quality: 80, mozjpeg: true }).toBuffer();
+  return `data:image/jpeg;base64,${jpeg.toString("base64")}`;
 }
 
 function buildSystemLayer(profileLines, { x, y, width, lineHeight, fontSize }, colors) {
@@ -206,14 +155,13 @@ function buildAmbientPortraitLayer(layout, colors, size) {
 </g>`;
 }
 
-function createHeroSvg(config, colors, size, portrait) {
+function createHeroSvg(config, colors, size, portraitImage) {
   const layout = layouts[size];
   const titlebar = layout.titlebar;
   const visual = layout.visualPanel;
   const info = layout.infoPanel;
   const clip = layout.portraitClip;
   const profileLines = buildProfileLines(config);
-  const ascii = createAsciiTspans(portrait, layout.portrait);
   const system = buildSystemLayer(profileLines, layout.system, colors);
   const ambientPortrait = buildAmbientPortraitLayer(layout, colors, size);
   const isDesktop = size === "desktop";
@@ -260,7 +208,7 @@ ${isDesktop ? `<circle cx="${liveX}" cy="${titlebar.y + titlebar.height / 2}" r=
 <text x="${layout.visualTitle.x}" y="${layout.visualTitle.y}" class="panel-title">VISUAL.MAP / PORTRAIT.SIGNAL</text>
 <text x="${layout.infoTitle.x}" y="${layout.infoTitle.y}" class="panel-title">SYSTEM.INFO / RESEARCH.BUILDER</text>
 ${ambientPortrait}
-<g clip-path="url(#portrait-clip)" mask="url(#portrait-reveal)"><text class="ascii">${ascii}</text></g>
+<g clip-path="url(#portrait-clip)" mask="url(#portrait-reveal)"><image href="${portraitImage}" x="${clip.x}" y="${clip.y}" width="${clip.width}" height="${clip.height}" preserveAspectRatio="xMidYMid slice"/></g>
 ${system.rows}
 <rect x="${layout.system.x + 2}" y="${cursorY}" width="9" height="${layout.system.fontSize + 2}" fill="${colors.cyan}" opacity="0"><animate attributeName="opacity" values="0;0;1;0;1;0;1;0" keyTimes="0;0.03;0.06;0.32;0.5;0.68;0.84;1" dur="1.4s" begin="3.3s" repeatCount="indefinite"/></rect>
 <text x="${layout.width / 2}" y="${layout.footerY}" text-anchor="middle" class="mono" font-size="10" letter-spacing="1.5" fill="${colors.muted}">${escapeXml(footerLabel)}</text>
@@ -288,8 +236,12 @@ export async function generateHeroAssets({ config, sourcePath, outputDirectory }
     .digest("hex")
     .slice(0, 8);
   const palette = paletteDefinitions[config.appearance.palette];
-  const desktopPortrait = await samplePortrait(sourceBuffer, layouts.desktop.portrait.columns, layouts.desktop.portrait.rows);
-  const mobilePortrait = await samplePortrait(sourceBuffer, layouts.mobile.portrait.columns, layouts.mobile.portrait.rows);
+  const desktopClip = layouts.desktop.portraitClip;
+  const mobileClip = layouts.mobile.portraitClip;
+  const [desktopImage, mobileImage] = await Promise.all([
+    preparePortraitImage(sourceBuffer, desktopClip.width, desktopClip.height),
+    preparePortraitImage(sourceBuffer, mobileClip.width, mobileClip.height)
+  ]);
   const assets = {
     desktopDark: `agent-console-${version}-dark.svg`,
     desktopLight: `agent-console-${version}-light.svg`,
@@ -299,10 +251,10 @@ export async function generateHeroAssets({ config, sourcePath, outputDirectory }
 
   await mkdir(outputDirectory, { recursive: true });
   await Promise.all([
-    writeFile(resolve(outputDirectory, assets.desktopDark), createHeroSvg(config, palette.dark, "desktop", desktopPortrait)),
-    writeFile(resolve(outputDirectory, assets.desktopLight), createHeroSvg(config, palette.light, "desktop", desktopPortrait)),
-    writeFile(resolve(outputDirectory, assets.mobileDark), createHeroSvg(config, palette.dark, "mobile", mobilePortrait)),
-    writeFile(resolve(outputDirectory, assets.mobileLight), createHeroSvg(config, palette.light, "mobile", mobilePortrait))
+    writeFile(resolve(outputDirectory, assets.desktopDark), createHeroSvg(config, palette.dark, "desktop", desktopImage)),
+    writeFile(resolve(outputDirectory, assets.desktopLight), createHeroSvg(config, palette.light, "desktop", desktopImage)),
+    writeFile(resolve(outputDirectory, assets.mobileDark), createHeroSvg(config, palette.dark, "mobile", mobileImage)),
+    writeFile(resolve(outputDirectory, assets.mobileLight), createHeroSvg(config, palette.light, "mobile", mobileImage))
   ]);
   await cleanOldAssets(outputDirectory, Object.values(assets));
 

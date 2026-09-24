@@ -7,7 +7,7 @@ import { generateProfileReadme } from "./lib/readme.mjs";
 
 const source = readFlag("--source");
 if (!source) {
-  console.error("Usage: npm run generate -- --source /absolute/path/to/transparent-portrait.png");
+  console.error("Usage: npm run generate -- --source /absolute/path/to/portrait.jpg");
   process.exit(1);
 }
 
