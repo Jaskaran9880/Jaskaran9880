@@ -67,6 +67,11 @@ export function validateConfig(config) {
   assert(Array.isArray(config.techStack) && config.techStack.length >= 1 && config.techStack.length <= 18, "techStack must contain 1 to 18 items.");
   config.techStack.forEach((item, index) => assertText(item, `techStack[${index}]`, 30));
 
+  if (config.now !== undefined) {
+    assert(Array.isArray(config.now) && config.now.length >= 1 && config.now.length <= 6, "now must contain 1 to 6 items.");
+    config.now.forEach((item, index) => assertText(item, `now[${index}]`, 120));
+  }
+
   assert(Array.isArray(config.links) && config.links.length >= 1 && config.links.length <= 4, "links must contain 1 to 4 items.");
   config.links.forEach((link, index) => {
     assertText(link?.label, `links[${index}].label`, 14);
