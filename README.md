@@ -85,7 +85,6 @@ I am a student exploring the world of programming through Python and web technol
 - Oct 24, 2026: pushed 1 commit to [Jaskaran9880/NeoFace](https://github.com/Jaskaran9880/NeoFace).
 - Oct 21, 2026: pushed 1 commit to [Jaskaran9880/NeoFace](https://github.com/Jaskaran9880/NeoFace).
 - Oct 11, 2026: pushed 1 commit to [Jaskaran9880/NeoFace](https://github.com/Jaskaran9880/NeoFace).
-- Oct 1, 2026: pushed 1 commit to [Jaskaran9880/NeoFace](https://github.com/Jaskaran9880/NeoFace).
 <!-- AUTO:ACTIVITY:END -->
 
 ---
