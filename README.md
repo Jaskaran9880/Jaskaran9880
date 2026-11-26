@@ -81,7 +81,7 @@ I am a student exploring the world of programming through Python and web technol
 ## 📈 Recent Activity
 
 <!-- AUTO:ACTIVITY:START -->
-- Oct 25, 2026: pushed 1 commit to [Jaskaran9880/NeoFace](https://github.com/Jaskaran9880/NeoFace).
+_No recent public activity was found._
 <!-- AUTO:ACTIVITY:END -->
 
 ---
